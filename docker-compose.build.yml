@@ -1,0 +1,8 @@
+services:
+  server:
+    image: mikeddev/html-to-pdf-server:${RUNTIME_TAG:-latest}
+    container_name: server
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile

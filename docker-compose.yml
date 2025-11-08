@@ -1,0 +1,15 @@
+services:
+  server:
+    image: mikeddev/html-to-pdf-server:${RUNTIME_TAG:-latest}
+    container_name: server
+    ports:
+      - "80:80"
+    environment:
+      - API_KEY=${PDF_SERVER_API_KEY}
+  tunnel:
+      container_name: cloudflared-tunnel
+      image: cloudflare/cloudflared
+      restart: unless-stopped
+      command: tunnel run
+      environment:
+        - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
