@@ -25,6 +25,10 @@ app.use('*', async (c, next) => {
   log('request', {method, path, code: c.res.status, duration: `${duration}ms`});
 });
 
+app.get('/health', c => {
+  return c.json({status: 'ok'}, 200);
+});
+
 app.use('*', async (c, next) => {
   const apiKey = process.env.API_KEY;
 
