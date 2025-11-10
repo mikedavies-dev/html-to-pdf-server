@@ -29,6 +29,10 @@ app.get('/health', c => {
   return c.json({status: 'ok'}, 200);
 });
 
+app.get('/', c => {
+  return c.json({status: 'ok'}, 200);
+});
+
 app.use('*', async (c, next) => {
   const apiKey = process.env.API_KEY;
 
@@ -180,11 +184,6 @@ async function generateImage(body: ImageRequest): Promise<Uint8Array> {
   return res;
 }
 
-app.get('/', c => {
-  return c.json({
-    status: 'ready!',
-  });
-});
 
 app.post('/pdf', zValidator('json', PdfRequestSchema), async c => {
   const data = c.req.valid('json');
